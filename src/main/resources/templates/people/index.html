@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"/>
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+</head>
+<body>
+
+<!--как цикл for each для каждого человека прописывается ссылка нва его страницу -->
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()} + ' , email : ' + ${person.getEmail()} ">This text will not be seen on the page </a>
+</div>
+<br/>
+<hr/>
+
+<form th:method="GET" th:action="@{/people/new}">
+    <input type="submit" value="Create new person"/>
+</form>
+
+</body>
+</html>

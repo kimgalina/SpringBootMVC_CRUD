@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit person </title>
+</head>
+<body>
+
+<!--эта форма будет отпраляться patch запросом на адрес /people
+и свои данные она будет отправлять на адрес (всегда пишется как @{}) /people
+a  там данные с этой формы поймает метод с аннотацией @PostMapping -->
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+  <!--строка ввода для имени человека с пом thymeleaf указываем в какое поле класса Person засунуть введенные данные -->
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <!--показывать ошибки валидации если они есть  -->
+  <!--${#fields} - доступ ко всем полям обьекта -->
+  <!--th:errors="*{name}" - ошибки или сообщения которые мы прописыали в
+  классе Person будут отображаться  именно для поля name-->
+  <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error (эта запись не будет видна)</div>
+
+  <br/>
+  <label for="age">Enter your age: </label>
+  <input type="text" th:field="*{age}" id="age"/>
+
+  <div  style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error </div>
+
+  <br/>
+
+  <label for="email">Enter your email: </label>
+  <input type="text" th:field="*{email}" id="email"/>
+
+  <div  style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error </div>
+
+  <!--кнопка для подтверждения -->
+  <input type="submit" value="Update"/>
+
+
+</form>
+
+</body>
+</html>

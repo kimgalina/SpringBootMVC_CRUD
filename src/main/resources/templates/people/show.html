@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>person</title>
+</head>
+<body>
+<!--<h2 th:text="User with id number = ${person.getId()}" ></h2>-->
+<p th:text="${person.getName()} + ', age : ' + ${person.getAge()}">NOTHING/p>
+<p th:text="${person.getId()}">Nothing</p>
+
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+
+<!-- с помощью тега <a ></a> можно посылать только get запросы
+поэтому чтобы удалить пользователя будем использовать форму -->
+<form th:method="DELETE" th:action="@{/people/{id}(id =${person.getId()})}">
+    <input type="submit" value="DELETE"/>
+</form>
+
+
+</body>
+</html>
